@@ -1,14 +1,18 @@
+@file:OptIn(ExperimentalAnimationApi::class)
+
 package com.example.testcompose.ui
 
 import android.text.format.DateFormat
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExitTransition
+import android.util.Log
+import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -44,16 +48,16 @@ fun HomeScreen(
     LazyColumn(
         modifier = Modifier.fillMaxWidth()
     ){
-        items(noteItems.value){ item: Note ->
+        items(noteItems.value){item: Note ->
             val isDeleted = rememberSaveable{
                 mutableStateOf(false)
-            }//todo
+            }
                 ActivityItem(
                     note = item,
                     isDeleted = isDeleted.value,
                     onSelect = {
-                        isDeleted.value = true//todo
-                        viewModel.removeNote(item)//todo
+                        isDeleted.value = true
+                        viewModel.removeNote(item)
                     }
                 )
         }
@@ -103,7 +107,11 @@ fun ActivityItem(note: Note, isDeleted:Boolean,onSelect:()->Unit){
                 .padding(16.dp)
                 .clickable(
                     indication = rememberRipple(bounded = true),
-                    onClick = onSelect,
+                    onClick = {
+                        if (this.transition.currentState == this.transition.targetState) {
+                            onSelect()
+                        }
+                    },
                     interactionSource = interactionSource
                 ),
             elevation = 7.dp

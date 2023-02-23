@@ -35,8 +35,7 @@ class HomeScreenViewModel:ViewModel() {
     fun removeNote(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
             databaseRepository.removeNote(note)
-            delay(1000)//todo
-            noteList.value.remove(note)
+            //noteList.value.remove(note)
         }
     }
 }
