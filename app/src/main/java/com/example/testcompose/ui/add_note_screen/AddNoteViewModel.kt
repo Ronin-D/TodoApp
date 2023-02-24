@@ -13,6 +13,8 @@ class AddNoteViewModel: ViewModel() {
 
     private val dbRepository = NoteRepository.get()
     val titleText = mutableStateOf("")
+    val dateButtonText = mutableStateOf("set up deadline date")
+    val timeButtonText = mutableStateOf("set up deadline time")
     val deadlineDate = mutableStateOf<Date?>(null)
     val deadlineTime = mutableStateOf<Date?>(null)
     fun addNote(note: Note){

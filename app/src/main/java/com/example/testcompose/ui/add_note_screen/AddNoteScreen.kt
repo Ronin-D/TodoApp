@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Build
+import android.text.format.DateFormat
 import android.widget.DatePicker
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
@@ -31,6 +32,9 @@ import com.example.testcompose.util.Screens
 import java.util.Calendar
 import java.util.Date
 
+
+private const val DATE_FORMAT = "EEEE, dd.MM.yyyy"
+private const val TIME_FORMAT = "HH:mm"
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -100,6 +104,10 @@ fun AddNoteScreen(
                        day = date[Calendar.DAY_OF_MONTH],
                        onSelect = {
                             viewModel.deadlineDate.value = it
+                           viewModel.dateButtonText.value = DateFormat.format(
+                               DATE_FORMAT,
+                               it
+                           ).toString()
                        }
                    )
                 },
@@ -107,7 +115,7 @@ fun AddNoteScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
             ) {
-                Text(text = "set up deadline date")
+                Text(text = viewModel.dateButtonText.value)
             }
             Button(
                 onClick =
@@ -119,6 +127,10 @@ fun AddNoteScreen(
                         minutes = date[Calendar.MINUTE],
                         onSelect = {
                             viewModel.deadlineTime.value = it
+                            viewModel.timeButtonText.value = DateFormat.format(
+                                TIME_FORMAT,
+                                it
+                            ).toString()
                         }
                     )
                 },
@@ -126,7 +138,7 @@ fun AddNoteScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
             ) {
-                Text(text = "set up deadline time")
+                Text(text =viewModel.timeButtonText.value)
             }
       }
         Button(

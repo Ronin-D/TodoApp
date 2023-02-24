@@ -30,9 +30,8 @@ import com.example.testcompose.models.Note
 import com.example.testcompose.ui.home_screen.HomeScreenViewModel
 import com.example.testcompose.util.Screens
 
-
 private const val DATE_FORMAT = "EEEE, dd.MM.yyyy"
-private const val TIME_FORMAT = "HH mm"
+private const val TIME_FORMAT = "HH:mm"
 
 @Composable
 fun HomeScreen(
