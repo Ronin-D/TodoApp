@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.testcompose.models.Note
 import com.example.testcompose.ui.home_screen.HomeScreenViewModel
@@ -36,7 +37,7 @@ private const val TIME_FORMAT = "HH:mm"
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: HomeScreenViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
     val noteItems = viewModel.noteList.collectAsState()
  Box(

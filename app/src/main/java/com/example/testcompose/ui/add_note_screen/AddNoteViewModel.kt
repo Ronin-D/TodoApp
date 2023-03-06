@@ -5,13 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testcompose.models.Note
 import com.example.testcompose.repositories.NoteRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Date
+import javax.inject.Inject
 
-class AddNoteViewModel: ViewModel() {
+@HiltViewModel
+class AddNoteViewModel @Inject constructor(
+   private val dbRepository: NoteRepository
+) : ViewModel() {
 
-    private val dbRepository = NoteRepository.get()
     val titleText = mutableStateOf("")
     val dateButtonText = mutableStateOf("set up deadline date")
     val timeButtonText = mutableStateOf("set up deadline time")

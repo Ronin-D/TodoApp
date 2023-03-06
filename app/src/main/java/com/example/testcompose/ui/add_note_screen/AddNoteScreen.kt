@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.testcompose.models.Note
@@ -40,7 +41,7 @@ private const val TIME_FORMAT = "HH:mm"
 @Composable
 fun AddNoteScreen(
     navController: NavController,
-    viewModel: AddNoteViewModel = viewModel()
+    viewModel: AddNoteViewModel = hiltViewModel()
 ) {
 
     val focusRequester = remember {
